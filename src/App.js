@@ -1,23 +1,19 @@
-import logo from './logo.svg';
+import { DiVim } from 'react-icons/di';
 import './App.css';
+import SideBar from './pages/SideBar';
+import { Route, Routes, Link } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App flex">
+    <SideBar />
+    <Routes>
+      <Route path='/' element={<div className='p-10 text-2xl'>Welcome to MyCUSC Dashboard </div>}/>
+      <Route path='/cirriculum' element={<div className='p-10 text-2xl'>Curriculum Page</div>}/>
+      <Route path='/batch' element={<div className='p-10 text-2xl'>Batch Page</div>}/>
+      <Route path='/student' element={<div className='p-10 text-2xl'>Student Page</div>}/>
+      <Route path='/score' element={<div className='p-10 text-2xl'>Score Page</div>}/>
+    </Routes>
     </div>
   );
 }
