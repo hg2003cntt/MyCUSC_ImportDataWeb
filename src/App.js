@@ -1,7 +1,11 @@
 import { DiVim } from 'react-icons/di';
 import './App.css';
-import SideBar from './pages/SideBar';
+import SideBar from './components/SideBar';
 import { Route, Routes, Link } from 'react-router-dom';
+import CirriculumPage from './pages/CirriculumPage';
+import BatchPage from './pages/BatchPage';
+import StudentPage from './pages/StudentPage';
+import ScorePage from './pages/ScorePage';
 
 function App() {
   return (
@@ -9,10 +13,10 @@ function App() {
     <SideBar />
     <Routes>
       <Route path='/' element={<div className='p-10 text-2xl'>Welcome to MyCUSC Dashboard </div>}/>
-      <Route path='/cirriculum' element={<div className='p-10 text-2xl'>Curriculum Page</div>}/>
-      <Route path='/batch' element={<div className='p-10 text-2xl'>Batch Page</div>}/>
-      <Route path='/student' element={<div className='p-10 text-2xl'>Student Page</div>}/>
-      <Route path='/score' element={<div className='p-10 text-2xl'>Score Page</div>}/>
+      <Route path='/cirriculum' element={<CirriculumPage/>}/>
+      <Route path='/batch' element={<BatchPage/>}/>
+      <Route path='/student' element={<StudentPage/>}/>
+      <Route path='/score' element={<ScorePage/>}/>
     </Routes>
     </div>
   );
