@@ -1,11 +1,11 @@
 import logo from "./../logo_cusc.png";
 import { MdMenuOpen } from "react-icons/md";
 import { FaBookBookmark } from "react-icons/fa6";
-import { IoSchool } from "react-icons/io5";
 import { FaUsersRectangle } from "react-icons/fa6";
 import { GrAchievement } from "react-icons/gr";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { MdEventAvailable } from "react-icons/md";
 
 const menuItems = [
   {
@@ -13,7 +13,6 @@ const menuItems = [
     label: "Chương trình đào tạo",
     link: "/cirriculum",
   },
-  { icons: <IoSchool size={20} />, label: "Danh sách lớp học", link: "/batch" },
   {
     icons: <FaUsersRectangle size={20} />,
     label: "Danh sách sinh viên",
@@ -24,9 +23,15 @@ const menuItems = [
     label: "Tổng hợp điểm thi",
     link: "/score",
   },
+  {
+    icons: <MdEventAvailable size={20} />,
+    label: "Điểm rèn luyện",
+    link: "/activity",
+  },
 ];
 export default function SiderBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(true);
+  const location = useLocation();
   return (
     <nav
       className={`shadow-md h-screen bg-yellow-400 text-gray p-2 transition-all duration-500 ${
@@ -58,7 +63,9 @@ export default function SiderBar() {
             <Link
               to={item.link}
               key={index}
-              className="relative px-4 py-4 my-2 hover:bg-yellow-500 cursor-pointer flex items-center group"
+              className={`relative px-4 py-4 my-2 hover:bg-yellow-500 cursor-pointer flex items-center group
+               ${location.pathname === item.link ? "bg-yellow-500 font-semibold text-white" : "hover:bg-yellow-500"}`}
+
             >
               <div>{item.icons}</div>
               <p
