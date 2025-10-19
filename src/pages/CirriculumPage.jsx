@@ -67,61 +67,74 @@ const CirriculumPage = () => {
     alert("Xem JSON trong console");
   };
 
-  // Tạo items cho Tabs
+  // Cập nhật tabItems
   const tabItems = Object.keys(sheetsData).map(sheetName => ({
     key: sheetName,
     label: sheetName,
     children: (
-      <Table
-        columns={createColumns(sheetsData[sheetName])}
-        dataSource={sheetsData[sheetName].map((row, index) => ({
-          ...row,
-          key: index
-        }))}
-        pagination={false}
-        scroll={{ x: '100%', y: 'calc(100vh - 200px)' }}
-        size="small"
-        bordered
-        style={{ width: '100%' }}
-      />
+      <div className="table-wrapper w-full h-full">
+        <Table
+          columns={createColumns(sheetsData[sheetName])}
+          dataSource={sheetsData[sheetName].map((row, index) => ({
+            ...row,
+            key: index
+          }))}
+          pagination={false}
+          scroll={{ x: 'max-content', y: 'calc(100vh - 250px)' }}
+          size="small"
+          bordered
+          style={{
+            width: '100%',
+            transition: 'all 0.3s ease'
+          }}
+        />
+      </div>
     )
   }));
 
   return (
-    <div className="p-4" style={{ height: '100vh' }}>
-      <div className="mb-4 flex justify-center">
-        <Upload {...uploadProps}>
-          <Button icon={<UploadOutlined />} size="large">
-            Tải lên file Excel
-          </Button>
-        </Upload>
-      </div>
-      
-      {Object.keys(sheetsData).length > 0 && (
-        <div style={{ height: 'calc(100% - 80px)' }}>
-          <div className="mb-4 flex justify-center items-center gap-4">
-            <Button 
-              type="primary" 
-              onClick={handleExportJSON}
-            >
-              Xuất JSON
+    <div className="flex-1 flex flex-col overflow-hidden">
+      <div className="p-4 flex flex-col h-full">
+        <div className="mb-4 flex justify-center">
+          <Upload {...uploadProps}>
+            <Button icon={<UploadOutlined />} size="large">
+              Tải lên file Excel
             </Button>
-            <span className="text-gray-600">
-              Tổng số sheet: {Object.keys(sheetsData).length}
-            </span>
-          </div>
-
-          <Tabs
-            activeKey={activeSheet}
-            onChange={setActiveSheet}
-            items={tabItems}
-            type="card"
-            size="small"
-            style={{ width: '100%' }}
-            centered
-          />
+          </Upload>
         </div>
-      )}
+        
+        {Object.keys(sheetsData).length > 0 && (
+          <div className="flex-1 flex flex-col min-w-0">
+            <div className="mb-4 flex justify-center items-center gap-4">
+              <Button 
+                type="primary" 
+                onClick={handleExportJSON}
+              >
+                Xuất JSON
+              </Button>
+              <span className="text-gray-600">
+                Tổng số sheet: {Object.keys(sheetsData).length}
+              </span>
+            </div>
+
+            <div className="flex-1 overflow-hidden">
+              <Tabs
+                activeKey={activeSheet}
+                onChange={setActiveSheet}
+                items={tabItems}
+                type="card"
+                size="small"
+                style={{ 
+                  height: '100%',
+                  transition: 'width 0.3s ease',
+                  textAlign: 'left' // Thêm style này
+                }}
+                // Xóa prop centered
+              />
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

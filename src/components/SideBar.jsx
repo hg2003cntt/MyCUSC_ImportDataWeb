@@ -65,17 +65,19 @@ export default function SiderBar() {
               key={index}
               className={`relative px-4 py-4 my-2 hover:bg-yellow-500 cursor-pointer flex items-center group
                ${location.pathname === item.link ? "bg-yellow-500 font-semibold text-white" : "hover:bg-yellow-500"}`}
-
             >
-              <div>{item.icons}</div>
-              <p
-                className={`absolute left-12 transition-all duration-500 overflow-hidden whitespace-nowrap ${
-                  !isMenuOpen ? "opacity-0 scale-0" : "opacity-100 scale-100"
-                }`}
-              >
-                {item.label}
-              </p>
-              <p
+              <div className="flex items-center">
+                <span>{item.icons}</span>
+                <span
+                  className={`ml-3 transition-all duration-500 overflow-hidden whitespace-nowrap ${
+                    !isMenuOpen ? "w-0 opacity-0" : "w-auto opacity-100"
+                  }`}
+                >
+                  {item.label}
+                </span>
+              </div>
+
+              <span
                 className={`absolute shadow-md rounded-md bg-white text-black
                 whitespace-nowrap
                 transition-all duration-300
@@ -86,10 +88,11 @@ export default function SiderBar() {
                 group-hover:p-2
                 group-hover:opacity-100
                 group-hover:left-16
+                z-10  
               `}
               >
                 {item.label}
-              </p>
+              </span>
             </Link>
           );
         })}
