@@ -6,6 +6,7 @@ import CirriculumPage from './pages/CirriculumPage';
 import BatchPage from './pages/BatchPage';
 import StudentPage from './pages/StudentPage';
 import ScorePage from './pages/ScorePage';
+import 'antd/dist/reset.css';
 
 function App() {
   return (
