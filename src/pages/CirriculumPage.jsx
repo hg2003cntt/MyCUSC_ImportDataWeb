@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import * as XLSX from "xlsx";
 import { Button, Upload, message, Table, Tabs } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
+import { UploadOutlined, DownloadOutlined } from '@ant-design/icons';
 
 const CirriculumPage = () => {
   const [sheetsData, setSheetsData] = useState({});
@@ -67,6 +67,21 @@ const CirriculumPage = () => {
     alert("Xem JSON trong console");
   };
 
+  const handleDownloadTemplate = () => {
+    // Đường dẫn tới file mẫu trong thư mục public
+    const templateUrl = '/files/CTDT.xlsx';
+    
+    // Tạo link ảo để tải file
+    const link = document.createElement('a');
+    link.href = templateUrl;
+    link.download = 'MauNhapDuLieu.xlsx'; // Tên file khi tải về
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    message.success('Đang tải file mẫu...');
+  };
+
   // Cập nhật tabItems
   const tabItems = Object.keys(sheetsData).map(sheetName => ({
     key: sheetName,
@@ -95,12 +110,21 @@ const CirriculumPage = () => {
   return (
     <div className="flex-1 flex flex-col overflow-hidden">
       <div className="p-4 flex flex-col h-full">
-        <div className="mb-4 flex justify-center">
+        <div className="mb-4 flex justify-center gap-4"> {/* Thêm gap-4 */}
           <Upload {...uploadProps}>
             <Button icon={<UploadOutlined />} size="large">
               Tải lên file Excel
             </Button>
           </Upload>
+          
+          {/* Thêm nút tải mẫu */}
+          <Button 
+            icon={<DownloadOutlined />} 
+            size="large"
+            onClick={handleDownloadTemplate}
+          >
+            Tải file mẫu
+          </Button>
         </div>
         
         {Object.keys(sheetsData).length > 0 && (
@@ -138,5 +162,6 @@ const CirriculumPage = () => {
     </div>
   );
 };
+
 
 export default CirriculumPage;
